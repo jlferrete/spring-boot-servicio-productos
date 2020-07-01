@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.formacionbdi.springboot.app.productos.models.entity.Producto;
+import com.formacionbdi.springboot.app.commons.models.entity.Producto;
 import com.formacionbdi.springboot.app.productos.models.service.IProductoService;
 
 @RestController
@@ -61,6 +61,7 @@ public class ProductoController {
 	@ResponseStatus(HttpStatus.CREATED)
 	public Producto crear(@RequestBody Producto producto) {
 		return productoService.save(producto);
+		
 	}
 	
 	@PutMapping("/editar/{id}")
@@ -69,9 +70,9 @@ public class ProductoController {
 		Producto productoDb = productoService.findById(id);
 		
 		productoDb.setNombre(producto.getNombre());
-		productoDb.setPrecio(producto.getPrecio());
-		
-		return productoService.save(productoDb);
+        productoDb.setPrecio(producto.getPrecio());
+        
+        return productoService.save(productoDb);
 	}
 	
 	@DeleteMapping("/eliminar/{id}")
@@ -79,4 +80,6 @@ public class ProductoController {
 	public void eliminar(@PathVariable Long id) {
 		productoService.deleteById(id);
 	}
+	
+
 }
